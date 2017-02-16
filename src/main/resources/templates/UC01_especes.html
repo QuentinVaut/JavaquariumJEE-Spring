@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Lister espèces</title>
 </head>
 <body>
+    <h1>Lister espèces :</h1>
+
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Couleur</th>
+            <th>Dimension</th>
+            <th>Prix</th>
+            <th>Détail</th>
+            <th>Mon aquarium</th>
+        </tr>
+
+        <tr th:each="p,iterationStatus  : ${lstPoissonDO}">
+            <td th:text="${p.espece}"></td>
+            <td th:text="${p.description}"></td>
+            <td th:text="${p.couleur}"></td>
+            <td th:text="${p.dimension}"></td>
+            <td th:text="${p.prix}"></td>
+            <td>Détail</td>
+            <td>Ajouter Enlever</td>
+        </tr>
+    </table>
 
 </body>
 </html>

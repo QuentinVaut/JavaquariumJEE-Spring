@@ -25,6 +25,7 @@ public class PoissonService implements IPoissonService {
         for (PoissonDO poisson : poissonRepository.findAll()) {
             PoissonVO poissonVO = new PoissonVO();
             poissonVO.setCode(String.valueOf(poisson.getId()));
+            poissonVO.setEspece(String.valueOf(poisson.getNom()));
             poissonVO.setCouleur(String.valueOf(poisson.getCouleur()));
             poissonVO.setDescription(String.valueOf(poisson.getDescritpion()));
             poissonVO.setDimension(String.valueOf("L : " + poisson.getLargeur()  + " x l :" + poisson.getLongeur()));
