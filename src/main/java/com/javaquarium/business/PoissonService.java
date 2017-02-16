@@ -3,21 +3,26 @@ package com.javaquarium.business;
 import com.javaquarium.beans.data.IPoissonService;
 import com.javaquarium.beans.data.PoissonDO;
 import com.javaquarium.beans.web.PoissonVO;
-import com.javaquarium.dao.PoissonDAO;
+import com.javaquarium.repository.PoissonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by quentin on 16/02/2017.
- */
+@Service
 public class PoissonService implements IPoissonService {
 
+    private final PoissonRepository poissonRepository;
+
+    @Autowired
+    public PoissonService(PoissonRepository poissonRepository) {
+        this.poissonRepository = poissonRepository;
+    }
 
     public List<PoissonVO> getPoissons() {
-        PoissonDAO poissonDAO = new PoissonDAO();
         ArrayList<PoissonVO> lstPoisson = new ArrayList<>();
-        for (PoissonDO poisson : poissonDAO.getAll()) {
+        for (PoissonDO poisson : poissonRepository.findAll()) {
             PoissonVO poissonVO = new PoissonVO();
             poissonVO.setCode(String.valueOf(poisson.getId()));
             poissonVO.setCouleur(String.valueOf(poisson.getCouleur()));
@@ -32,7 +37,6 @@ public class PoissonService implements IPoissonService {
 
     @Override
     public void ajout(PoissonVO poisson) {
-        PoissonDAO poissonDAO = new PoissonDAO();
         PoissonDO poissonDo = new PoissonDO();
         poissonDo.setCouleur(poisson.getCouleur());
         poissonDo.setDescritpion(poisson.getDescription());
@@ -40,7 +44,7 @@ public class PoissonService implements IPoissonService {
         poissonDo.setLongeur(Float.parseFloat(poisson.getDimension()));
         poissonDo.setNom(poisson.getEspece());
         poisson.setPrix(poisson.getPrix());
-        poissonDAO.ajout(poissonDo);
+        poissonRepository.save(poissonDo);
     }
 
 }
