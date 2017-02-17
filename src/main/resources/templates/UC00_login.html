@@ -16,5 +16,24 @@
     <div><label> Password: <input type="password" name="password"/> </label></div>
     <div><input type="submit" value="Sign In"/></div>
 </form>
+
+
+<form action="#" th:action="@{/login}" th:object="${loginVO}" method="post">
+    <table>
+        <tr>
+            <td>Utilisateur :</td>
+            <td><input type="text" th:field="*{utilisateur}" /></td>
+            <td th:if="${#fields.hasErrors('utilisateur')}" th:errors="*{utilisateur}">Utilisateur erreur</td>
+        </tr>
+        <tr>
+            <td>Mot de passe :</td>
+            <td><input type="text" th:field="*{motDePasse}" /></td>
+            <td th:if="${#fields.hasErrors('motDePasse')}" th:errors="*{motDePasse}">Mot de passe erreur</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>
